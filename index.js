@@ -19,10 +19,15 @@ app.use(express.static("public"));
 app.use(express.static("node_modules/bootstrap/dist"));
 
 app.get("/", (req, res) => {
-  //card
-  const tipo = req.body.tipo;
+  res.render("home", {
+    style: "home.css",
+  });
+});
 
-  const sql = `SELECT nome , price FROM jogos WHERE  tipo '${tipo}' LIMIT 4`;
+app.get("/catalog", (req, res) => {
+  //card
+
+  const sql = `SELECT jogosNome , jogosPrice, jogosImg FROM Jogo `;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -32,19 +37,19 @@ app.get("/", (req, res) => {
 
     const jogo = [0];
   });
-  res.render("home", {
-    style: "home.css",
+  res.render("catalogo", {
+    style: "catalogo.css",
   });
 });
 
-app.post("/user/login", (req, res) => {
+app.post("/user/insertuser", (req, res) => {
   const name = req.body.name;
   const surname = req.body.surname;
   const adress = req.body.adress;
   const email = req.body.email;
   const password = req.body.password;
 
-  const sql = `INSERT INTO user (userId,userSurname,userAdress, userEmail, userPassword) VALUES ('${name}','${surname}','${adress}', '${email}','${password}') `;
+  const sql = `INSERT INTO user (userName,userSurname,userAdress, userEmail, userPassword) VALUES ('${name}','${surname}','${adress}', '${email}','${password}') `;
 
   conn.query(sql, (err) => {
     if (err) {
