@@ -1,0 +1,54 @@
+.footer {
+  min-height: 300px;
+  /* padding-top: 70px; */
+  background-color: #010611;
+  color: #ffff;
+}
+.footer-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 600px;
+  margin-bottom: 5px;
+  padding-top: 7px;
+}
+
+.enfeite {
+  margin-left: 1%;
+  width: 98%;
+  height: 3px;
+  border-radius: 2px;
+  background-color: #d9d9d95a;
+}
+
+.ft-h5 {
+  font-size: 28px;
+  font-weight: bolder;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+
+.cnpjto {
+  margin-top: 92px;
+  font-size: 10px;
+  font-weight: lighter;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.badge {
+  margin-top: 18px;
+  margin-left: 39px;
+  padding: 5px;
+  padding-right: 10px;
+  text-decoration: none;
+  background: #263241;
+  max-width: 251px;
+  max-height: 56px;
+}
+
+.badge-icon {
+  width: 29px;
+  height: 29px;
+}

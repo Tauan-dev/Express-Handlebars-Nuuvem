@@ -1,0 +1,76 @@
+main {
+  min-height: 800px;
+  background: #142a3d;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.fb {
+  max-width: 270px;
+  min-height: 30px;
+  background: #1877f2;
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 2px;
+  margin-left: 90px;
+  margin-top: 70px;
+}
+
+.google {
+  max-width: 270px;
+  min-height: 30px;
+  background: #ffff;
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 20px;
+  margin-left: 90px;
+}
+
+.fb-inside {
+  color: #ffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.google-inside {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+.icon-login {
+  width: 29px;
+  height: 29px;
+}
+
+.login-container {
+  display: flex;
+  height: 420px;
+  width: 450px;
+  background-color: #263241;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 5px;
+}
+
+.enfeite-login {
+  min-width: 100%;
+  height: 3px;
+  background: #151d27;
+  margin-top: 40px;
+}
+
+.input-color {
+  color: #fff;
+}
+
+form {
+  max-width: 270px;
+  margin-left: 90px;
+}
+
+.btn-login {
+  width: 270px;
+}

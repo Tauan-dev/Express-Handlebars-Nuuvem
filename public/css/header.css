@@ -1,0 +1,52 @@
+.nuuvem-logo {
+  width: 42px;
+  height: 43px;
+  position: absolute;
+  top: 25px;
+  left: 117px;
+}
+
+.nuuvem-name {
+  width: 142px;
+  height: 53px;
+  position: absolute;
+  top: 20px;
+  left: 177px;
+}
+.barra-header {
+  height: 54px;
+  width: 3px;
+  background-color: #d9d9d95a;
+  border-radius: 2px;
+  position: absolute;
+  top: 20px;
+  left: 100px;
+}
+
+.logo-img {
+  width: 42px;
+  height: 38px;
+}
+
+h1 {
+  text-align: left;
+}
+.custom-navbar {
+  background-color: #151d27;
+  color: #ffff;
+  min-height: 90px;
+}
+
+.carrinho {
+  margin-right: 10px;
+}
+
+.lupa {
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.badge-header-icon {
+  width: 39px;
+  height: 39px;
+}

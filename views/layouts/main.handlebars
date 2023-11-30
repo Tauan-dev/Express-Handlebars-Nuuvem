@@ -1,0 +1,596 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/menu.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/home.css" />
+
+    <title>Home</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar custom-navbar navbar-dark">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="barra-header"></div>
+          <a href="./home.html" target="_self">
+            <img
+              src="../assets/header/nuvem-icon.png"
+              alt="nuuvem-logo"
+              class="nuuvem-logo"
+            />
+          </a>
+
+          <img
+            src="../assets/header/nuuvem.png"
+            alt="nuuvem"
+            class="nuuvem-name"
+          />
+          <div class="ms-auto">
+            <a href="./catalogo.html" target="_self" class="lupa">
+              <img
+                src="../assets/header/icons8-lupa.png"
+                class="badge-header-icon"
+                alt="carrinho"
+              />
+            </a>
+            <a href="./carrinho.html" target="_self" class="carrinho">
+              <img
+                src="../assets/header/icons8-carrinho.png"
+                class="badge-header-icon"
+                alt="carrinho"
+              />
+            </a>
+          </div>
+
+          <div
+            class="offcanvas offcanvas-start text-bg-dark"
+            tabindex="-1"
+            id="offcanvasDarkNavbar"
+            aria-labelledby="offcanvasDarkNavbarLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+                Menu
+              </h5>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="../assets/menu/icons8-etiqueta-promo-cinza.png"
+                      alt="promoção"
+                      class="menu-img"
+                    />
+                    Promoções
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="#promo"
+                        target="_self"
+                      >Todas as promoções</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Abaixo de R$ 20,00</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="../assets/menu/icons8-pc.png"
+                      alt="promoção"
+                      class="menu-img"
+                    />
+                    PC
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                      <a class="dropdown-item" href="#">Todos os jogos</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Pré venda</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Lançamentos</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#">
+                    <img
+                      src="../assets/menu/icons8-play-station.png"
+                      alt="promoção"
+                      class="menu-img"
+                    />
+                    PlayStation
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#">
+                    <img
+                      src="../assets/menu/icons8-xbox.png"
+                      alt="promoção"
+                      class="menu-img"
+                    />Xbox</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#">
+                    <img
+                      src="../assets/menu/icons8-logotipo-do-nintendo-switch.png"
+                      alt="promoção"
+                      class="menu-img"
+                    />Switch</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="./login.html">
+                    <img
+                      src="../assets/menu/icons8-usuário.png"
+                      alt="promoção"
+                      class="menu-img"
+                    />Entrar</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        data-bs-interval="3000"
+      >
+        <ol class="carousel-indicators">
+          <li
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active"
+          ></li>
+          <li
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+          ></li>
+          <li
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+          ></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active c-item">
+            <img
+              class="d-block w-100 c-img"
+              src="../assets/home/carrosel/carrosel-1.png"
+              alt="First slide"
+            />
+          </div>
+          <div class="carousel-item c-item">
+            <img
+              class="d-block w-100 c-img"
+              src="../assets/home/carrosel/carrosel-2.png"
+              alt="Second slide"
+            />
+          </div>
+          <div class="carousel-item c-item">
+            <img
+              class="d-block w-100 c-img"
+              src="../assets/home/carrosel/carrosel-3.png"
+              alt="Third slide"
+            />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="stamp">
+        <ul>
+          <img
+            src="../assets/home/icons/icons8-certificado.png"
+            alt="loja-certificada"
+            class="stamp-icon"
+          />
+          <li>
+            <p>Loja</p>
+            <h5>100% Oficial</h5>
+          </li>
+          <div class="separation-bar-stamp"></div>
+          <img
+            src="../assets/home/icons/icons8-verificação-de-senha.png"
+            alt="loja-certificada"
+            class="stamp-icon"
+          />
+          <li>
+            <p>Experiência</p>
+            <h5>Segura e simples</h5>
+          </li>
+          <div class="separation-bar-stamp"></div>
+          <img
+            src="../assets/home/icons/icons8-controle.png"
+            alt="loja-certificada"
+            class="stamp-icon"
+          />
+          <li>
+            <p>Divirta-se</p>
+            <h5>Com os melhores jogos</h5>
+          </li>
+        </ul>
+      </div>
+      <h2 class="m-title">WARNER</h2>
+      <div class="card-container">
+        <div class="card">
+          <img
+            src="../assets/home/jogos/batman-arkham.jpg"
+            class="card-img-top"
+            alt="batman-arkham"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Batman Arkham</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 150,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/mk-11.jpg"
+            class="card-img-top"
+            alt="mk-11"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Mortal Kombat 11</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 49,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/Lego Marvel.jpg"
+            class="card-img-top"
+            alt="lego-marvel"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Lego Marvel Hero</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 100,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/LEGO Star Wars.jpg"
+            class="card-img-top"
+            alt="star-wars"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Lego Star Wars</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 63,99</a>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="m-title">Pré Vendas</h2>
+      <div class="card-container">
+        <div class="card">
+          <img
+            src="../assets/home/jogos/super-mario-rpg.jpg"
+            class="card-img-top"
+            alt="batman-arkham"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Super Mario RPG</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 299,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/gangs-of-sherwood.jpg"
+            class="card-img-top"
+            alt="batman-arkham"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Gangs Of SHERWOOD</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 250,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/Eiyuden Chronicle.jpg"
+            class="card-img-top"
+            alt="batman-arkham"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Eiyuden Chronicle</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 200,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/tekken-8.jpg"
+            class="card-img-top"
+            alt="batman-arkham"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Tekken 8</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 350,00</a>
+          </div>
+        </div>
+      </div>
+      <div class="banner">
+        <img
+          src="../assets/home/jogos/hogwarts-legacy.jpg"
+          alt="hogwarts-legacy"
+          class="b-img"
+        />
+      </div>
+      <h2 class="m-title">Lançamentos</h2>
+      <div class="card-container">
+        <div class="card">
+          <img
+            src="../assets/home/jogos/super-mario-wonder.jpg"
+            class="card-img-top"
+            alt="super-mario-wonder"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Super Mario Wonder</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 299,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/baldur-gate-3.jpg"
+            class="card-img-top"
+            alt="baldur-gate"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Baldur's Gate 3</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 350,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/cod-modern-warfare-3.jpg"
+            class="card-img-top"
+            alt="cod"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Call of Duty - Modern Warfare 3</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 250,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/street-fighter-6.jpg"
+            class="card-img-top"
+            alt="street-figther-6"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Street figther 6</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 150,00</a>
+          </div>
+        </div>
+      </div>
+      <h2 class="m-title" id="promo">Promoções</h2>
+      <div class="card-container">
+        <div class="card">
+          <img
+            src="../assets/home/jogos/My-hero.jpg"
+            class="card-img-top"
+            alt="batman-arkham"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">My Hero One Justice</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 35,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/one-punch.jpg"
+            class="card-img-top"
+            alt="batman-arkham"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">One Punchman</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 50,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/tales-of.jpg"
+            class="card-img-top"
+            alt="tales-of-arasia"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">Tales of Arasia</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 99,00</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="../assets/home/jogos/spell-force.jpg"
+            class="card-img-top"
+            alt="spell-force"
+          />
+          <div class="card-body card-color">
+            <h6 class="card-title">SpellForce</h6>
+
+            <a
+              href="./carrinhoCheio.html"
+              class="btn btn-secondary btn-tamanho"
+            >R$ 150,00</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <ul class="footer-list">
+        <li>Suporte</li>
+        <li>Blog</li>
+        <li>Carreira</li>
+        <li>Seu jogo na nuuvem</li>
+        <li>Nuuvem Co op</li>
+      </ul>
+      <div class="enfeite"></div>
+      <h5 class="ft-h5">ACOMPANHE-NOS</h5>
+      <a
+        href="https://www.facebook.com/nuuvembrasil"
+        target="_blank"
+        class="badge"
+      >
+        <img
+          src="../assets/footer/icons/icons8-facebook.png"
+          class="badge-icon"
+          alt="facebook"
+        />
+        Facebook</a>
+      <a
+        href="https://www.youtube.com/user/Nuuvem"
+        target="_blank"
+        class="badge"
+      >
+        <img
+          src="../assets/footer/icons/icons8-reproduzir-youtube.png"
+          class="badge-icon"
+          alt="youtube"
+        />
+        Youtube</a>
+      <a href="https://www.instagram.com/nuuvem" target="_blank" class="badge">
+        <img
+          src="../assets/footer/icons/icons8-instagram.png"
+          class="badge-icon"
+          alt="instagram"
+        />
+        Instagram</a>
+      <a href="https://twitter.com/nuuvem" target="_blank" class="badge">
+        <img
+          src="../assets/footer/icons/icons8-twitter.png"
+          class="badge-icon"
+          alt="twitter"
+        />
+        Twitter</a>
+      <p class="cnpjto">
+        Nuuvem Ltda. - CNPJ 17.126.332/0001-10
+        <br />Rua Lauro Müller, n° 116, sala 503 - Torre do Rio Sul - Botafogo -
+        Rio de Janeiro, RJ - 22290-160
+      </p>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
