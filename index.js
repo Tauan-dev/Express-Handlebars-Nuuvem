@@ -24,6 +24,12 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/register", (req, res) => {
+  res.render("register", {
+    style: "register.css",
+  });
+});
+
 app.get("/catalog", (req, res) => {
   //card
 
@@ -42,22 +48,22 @@ app.get("/catalog", (req, res) => {
   });
 });
 
-app.post("/user/insertuser", (req, res) => {
+app.post("/user/register", (req, res) => {
   const name = req.body.name;
   const surname = req.body.surname;
   const adress = req.body.adress;
   const email = req.body.email;
   const password = req.body.password;
 
-  const sql = `INSERT INTO user (userName,userSurname,userAdress, userEmail, userPassword) VALUES ('${name}','${surname}','${adress}', '${email}','${password}') `;
+  const sql = `INSERT INTO user (userName,userSurname,userAddress, userEmail, userPassword) VALUES ('${name}','${surname}','${adress}', '${email}','${password}') `;
 
   conn.query(sql, (err) => {
     if (err) {
       console.log(err);
       return;
     }
-    res.redirect("/");
     console.log("User Inserted");
+    res.redirect("/");
   });
 });
 
