@@ -67,7 +67,7 @@ const conn = mysql.createConnection({
   port: 3307,
   user: "root",
   password: "tauan198",
-  database: "nodemysql",
+  database: "nodegameteste",
 });
 
 conn.connect((err) => {

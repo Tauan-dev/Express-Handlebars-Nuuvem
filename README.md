@@ -15,6 +15,10 @@ Uma réplica do site Nuuvem utilizando Handlebars, MySQL, Node.js com Express, B
 ## Sobre o Projeto
 
 O Nuuvem Replica é um projeto que visa reproduzir as principais funcionalidades do site Nuuvem, oferecendo uma plataforma de distribuição digital de jogos e softwares. Desenvolvido como parte de um projeto educacional, o objetivo é praticar o uso de tecnologias web modernas.
+<br/>
+Responsividade ainda em desenvolvimento !
+
+- **Design no figma** : https://www.figma.com/file/6FCSPhRwQr8E478csWZZ1M/Nuuvem?type=design&node-id=0%3A1&mode=design&t=d1EPEfpVgy2q3Hw4-1
 
 ## Tecnologias Utilizadas
 

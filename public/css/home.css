@@ -22,14 +22,16 @@ main {
 }
 
 .stamp {
-  margin-left: 115px;
+  margin-left: 155px;
   display: flex;
   justify-content: space-between;
   height: 100px;
+  min-width: 500px;
   width: 80%;
   border-radius: 10px;
   background-color: #141627;
   padding: 10px;
+  margin-top: 40px;
   overflow: hidden;
 }
 
@@ -38,6 +40,8 @@ main {
   flex-direction: row;
   padding: 0;
   list-style: none;
+  align-items: center;
+  margin-left: 125px;
 }
 
 .stamp p {
@@ -63,10 +67,11 @@ main {
 
 .separation-bar-stamp {
   width: 3px;
-  height: 80px;
+  height: 90px;
   border-radius: 2px;
   background-color: #142a3d;
   margin-left: 40px;
+  margin-top: 15px;
 }
 
 .m-title {
@@ -78,7 +83,7 @@ main {
 
 .banner {
   height: 200px;
-  width: 90%;
+  width: 92%;
   margin-left: 50px;
 }
 
@@ -92,15 +97,18 @@ main {
 .btn-tamanho {
   width: 180px;
   font-weight: bold;
+  margin-left: 12px;
 }
 .card {
-  width: 220px;
+  width: 240px;
   height: 208px;
   margin-right: 10px;
-  margin-left: 50px;
+  margin-left: 90px;
   margin-top: 20px;
   margin-bottom: 20px;
+  overflow: hidden;
 }
+
 .card-img-top {
   width: 100%;
 }
