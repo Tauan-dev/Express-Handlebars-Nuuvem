@@ -41,10 +41,14 @@ app.get("/catalog", (req, res) => {
       return;
     }
 
-    const jogo = [0];
-  });
-  res.render("catalogo", {
-    style: "catalogo.css",
+    const jogo = data;
+
+    console.log(jogo);
+
+    res.render("catalog", {
+      jogo: jogo,
+      style: "catalog.css",
+    });
   });
 });
 

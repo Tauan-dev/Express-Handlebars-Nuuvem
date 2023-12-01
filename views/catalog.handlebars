@@ -1,0 +1,140 @@
+<h1>Catalógo</h1>
+
+<div class="container mt-3 off-margin-search d-flex justify-content-center">
+  <form class="d-flex">
+    <input
+      class="form-control me-2 search-tm"
+      type="search"
+      placeholder="Busque seus jogos"
+      aria-label="Search"
+    />
+    <button
+      class="btn btn-outline-primary search-tm-btn"
+      type="submit"
+    >Pesquisar</button>
+  </form>
+</div>
+
+<ul class="section">
+  <li>
+    <div class="dropdown dropdown-search">
+      <button
+        class="btn btn-secondary dropdown-toggle dropdown-toggle-search"
+        type="button"
+        id="platformDropdown"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Plataforma
+      </button>
+      <div class="dropdown-menu" aria-labelledby="platformDropdown">
+        <a class="dropdown-item" href="#">PC</a>
+        <a class="dropdown-item" href="#">Xbox</a>
+        <a class="dropdown-item" href="#">PlayStation</a>
+        <a class="dropdown-item" href="#">Nintendo</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="dropdown dropdown-search">
+      <button
+        class="btn btn-secondary dropdown-toggle dropdown-toggle-search"
+        type="button"
+        id="typeDropdown"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Tipo
+      </button>
+      <div class="dropdown-menu" aria-labelledby="typeDropdown">
+        <a class="dropdown-item" href="#">Jogos</a>
+        <a class="dropdown-item" href="#">Pacote</a>
+        <a class="dropdown-item" href="#">DLC</a>
+        <a class="dropdown-item" href="#">Assinatura</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="dropdown dropdown-search">
+      <button
+        class="btn btn-secondary dropdown-toggle dropdown-toggle-search"
+        type="button"
+        id="categoryDropdown"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Categorias
+      </button>
+      <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+        <a class="dropdown-item" href="#">Ação</a>
+        <a class="dropdown-item" href="#">Arcade</a>
+        <a class="dropdown-item" href="#">Aventura</a>
+        <a class="dropdown-item" href="#">Fantasia</a>
+        <a class="dropdown-item" href="#">FPS</a>
+        <a class="dropdown-item" href="#">Hack and Slash</a>
+        <a class="dropdown-item" href="#">Luta</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="dropdown dropdown-search">
+      <button
+        class="btn btn-secondary dropdown-toggle dropdown-toggle-search"
+        type="button"
+        id="distributorDropdown"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Desenvolvedora
+      </button>
+      <div class="dropdown-menu" aria-labelledby="distributorDropdown">
+        <a class="dropdown-item" href="#">Nautgh Dog</a>
+        <a class="dropdown-item" href="#">Ubsoft</a>
+        <a class="dropdown-item" href="#">BANDAI NAMCO Entertainment</a>
+        <a class="dropdown-item" href="#">Bethesda</a>
+        <a class="dropdown-item" href="#">Disney</a>
+        <a class="dropdown-item" href="#">Epic</a>
+        <a class="dropdown-item" href="#">Square Enix</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="dropdown dropdown-search">
+      <button
+        class="btn btn-secondary dropdown-toggle dropdown-toggle-search"
+        type="button"
+        id="priceDropdown"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Preço
+      </button>
+      <div class="dropdown-menu" aria-labelledby="priceDropdown">
+        <a class="dropdown-item" href="#">Abaixo de R$ 20,00</a>
+        <a class="dropdown-item" href="#">Abaixo de R$ 50,00</a>
+        <a class="dropdown-item" href="#">Abaixo de R$ 70,00</a>
+        <a class="dropdown-item" href="#">Abaixo de R$ 150,00</a>
+        <a class="dropdown-item" href="#">Abaixo de R$ 180,00</a>
+        <a class="dropdown-item" href="#">Abaixo de R$ 200,00</a>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<div class="card-container">
+  {{#each jogo}}
+    <div class="card">
+      <img src="{{this.jogosImg}}" class="card-img-top" alt="" />
+      <div class="card-body card-color">
+        <h6 class="card-title">{{this.jogosNome}}</h6>
+        <a href="#" class="btn btn-secondary btn-tamanho">R$
+          {{this.jogosPrice}}</a>
+      </div>
+    </div>
+  {{/each}}
+</div>
