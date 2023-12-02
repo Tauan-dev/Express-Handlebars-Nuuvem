@@ -81,7 +81,7 @@ app.get("/catalog/:id", (req, res) => {
 
 app.get("/catalog/tipo/:tipo", (req, res) => {
   const tipo = req.params.tipo;
-
+  console.log(`Request for /catalog/tipo/${tipo}`);
   const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosTipo = '${tipo}'`;
 
   conn.query(sql, (err, data) => {
