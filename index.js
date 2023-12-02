@@ -32,9 +32,9 @@ app.get("/register", (req, res) => {
   });
 });
 
-app.get("/catalog", (req, res) => {
-  //card
+//   ############### CATALOGO  ###############
 
+app.get("/catalog", (req, res) => {
   const sql = `SELECT jogosNome , jogosPrice, jogosImg ,jogosPlataforma FROM Jogo `;
 
   conn.query(sql, (err, data) => {
@@ -55,7 +55,7 @@ app.get("/catalog", (req, res) => {
   });
 });
 
-//plataform
+// ###############  PLATAFORMA  ###############
 
 app.get("/catalog/:id", (req, res) => {
   const id = req.params.id;
@@ -77,7 +77,7 @@ app.get("/catalog/:id", (req, res) => {
   });
 });
 
-//tipo
+//  ###############  TIPO  ###############
 
 app.get("/catalog/tipo/:tipo", (req, res) => {
   const tipo = req.params.tipo;
@@ -100,14 +100,16 @@ app.get("/catalog/tipo/:tipo", (req, res) => {
   });
 });
 
+// ###############  CATEGORIA  ###############
+
 app.get("/catalog/category/:category", (req, res) => {
   const category = req.params.category;
 
-  // Consulta para obter detalhes dos jogos
   const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosCategories = '${category}'`;
 
-  // Consulta para contar o número de jogos por categoria
   const sqlCount = `SELECT jogosCategories, COUNT(*) AS TotalJogos FROM Jogo WHERE jogosCategories = '${category}' GROUP BY jogosCategories`;
+
+  const categoryname = category;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -125,7 +127,6 @@ app.get("/catalog/category/:category", (req, res) => {
         return;
       }
 
-      // Resultado da segunda consulta (número total de jogos por categoria)
       const countResult = countData[0] || { TotalJogos: 0 };
 
       console.log(countResult);
@@ -135,7 +136,32 @@ app.get("/catalog/category/:category", (req, res) => {
         totalJogos: countResult.TotalJogos,
         style: "category.css",
         about: "Category",
+        categoryName: categoryname,
       });
+    });
+  });
+});
+
+//  ############### DESENVOLVEDORA  ###############
+
+app.get("/catalog/development/:desenvolvedora", (req, res) => {
+  const desenvolvedora = req.params.desenvolvedora;
+  console.log(desenvolvedora);
+  const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosDesenvolvedora = '${desenvolvedora}'`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    const jogo = data;
+
+    console.log(jogo);
+
+    res.render("development", {
+      jogos: jogo,
+      style: "development.css",
+      about: "Development",
     });
   });
 });
