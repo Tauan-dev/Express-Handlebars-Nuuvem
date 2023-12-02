@@ -35,7 +35,7 @@ app.get("/register", (req, res) => {
 app.get("/catalog", (req, res) => {
   //card
 
-  const sql = `SELECT jogosNome , jogosPrice, jogosImg FROM Jogo `;
+  const sql = `SELECT jogosNome , jogosPrice, jogosImg ,jogosPlataforma FROM Jogo `;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -51,6 +51,51 @@ app.get("/catalog", (req, res) => {
       jogo: jogo,
       style: "catalog.css",
       about: "Catalog",
+    });
+  });
+});
+
+//plataform
+
+app.get("/catalog/:id", (req, res) => {
+  const id = req.params.id;
+
+  const sql = `SELECT jogosNome, jogosPrice, jogosImg ,jogosPlataforma FROM Jogo JOIN Plataforma ON Jogo.jogosPlataforma = Plataforma.plataformaID WHERE Plataforma.plataformaID = '${id}'`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    jogo = data;
+
+    res.render("plataform", {
+      jogos: jogo,
+      style: "plataform.css",
+    });
+  });
+});
+
+//tipo
+
+app.get("/catalog/tipo/:tipo", (req, res) => {
+  const tipo = req.params.tipo;
+
+  const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosTipo = '${tipo}'`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    jogo = data;
+
+    res.render("type", {
+      jogos: jogo,
+      style: "type.css",
+      about: "Game type",
     });
   });
 });
