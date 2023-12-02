@@ -21,12 +21,14 @@ app.use(express.static("node_modules/bootstrap/dist"));
 app.get("/", (req, res) => {
   res.render("home", {
     style: "home.css",
+    about: "Home",
   });
 });
 
 app.get("/register", (req, res) => {
   res.render("register", {
     style: "register.css",
+    about: "Register",
   });
 });
 
@@ -48,6 +50,7 @@ app.get("/catalog", (req, res) => {
     res.render("catalog", {
       jogo: jogo,
       style: "catalog.css",
+      about: "Catalog",
     });
   });
 });
