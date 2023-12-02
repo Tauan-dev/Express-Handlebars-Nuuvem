@@ -4,14 +4,12 @@ const mysql = require("mysql");
 
 const app = express();
 
-//configurar o express pra pegar o body
 app.use(express.urlencoded({ extended: true }));
 
-//pega o body pego em formato json
 app.use(express.json());
 
 const hbs = exphbs.create({});
-app.engine("handlebars", hbs.engine); // Alteração aqui
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
@@ -117,10 +115,8 @@ app.get("/catalog/category/:category", (req, res) => {
       return;
     }
 
-    // Resultado da primeira consulta (detalhes dos jogos)
     const jogos = data;
 
-    // Executar a segunda consulta para obter o número total de jogos por categoria
     conn.query(sqlCount, (err, countData) => {
       if (err) {
         console.log(err);
@@ -166,6 +162,30 @@ app.get("/catalog/development/:desenvolvedora", (req, res) => {
   });
 });
 
+app.get("/catalog/price/:price", (req, res) => {
+  const price = req.params.price;
+
+  const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo 
+               FROM Jogo 
+               WHERE jogosPrice < ${price}`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    const jogos = data;
+
+    res.render("price", {
+      jogos: jogos,
+      style: "price.css",
+      about: "Price",
+    });
+  });
+});
+
+// ##### INSERT USER #####
 app.post("/user/register", (req, res) => {
   const name = req.body.name;
   const surname = req.body.surname;
@@ -200,14 +220,12 @@ conn.connect((err) => {
   } else {
     console.log("Conectou ao MySQL");
 
-    // Inicia a aplicação após a conexão bem-sucedida
     app.listen(3000, () => {
       console.log("App funcionando");
     });
   }
 });
 
-// Tratamento de erros de conexão
 conn.on("error", (err) => {
   console.error("Erro de conexão com o MySQL:", err);
 });
