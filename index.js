@@ -100,6 +100,46 @@ app.get("/catalog/tipo/:tipo", (req, res) => {
   });
 });
 
+app.get("/catalog/category/:category", (req, res) => {
+  const category = req.params.category;
+
+  // Consulta para obter detalhes dos jogos
+  const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosCategories = '${category}'`;
+
+  // Consulta para contar o número de jogos por categoria
+  const sqlCount = `SELECT jogosCategories, COUNT(*) AS TotalJogos FROM Jogo WHERE jogosCategories = '${category}' GROUP BY jogosCategories`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    // Resultado da primeira consulta (detalhes dos jogos)
+    const jogos = data;
+
+    // Executar a segunda consulta para obter o número total de jogos por categoria
+    conn.query(sqlCount, (err, countData) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      // Resultado da segunda consulta (número total de jogos por categoria)
+      const countResult = countData[0] || { TotalJogos: 0 };
+
+      console.log(countResult);
+
+      res.render("category", {
+        jogos: jogos,
+        totalJogos: countResult.TotalJogos,
+        style: "category.css",
+        about: "Category",
+      });
+    });
+  });
+});
+
 app.post("/user/register", (req, res) => {
   const name = req.body.name;
   const surname = req.body.surname;
