@@ -33,7 +33,7 @@ app.get("/register", (req, res) => {
 //   ############### CATALOGO  ###############
 
 app.get("/catalog", (req, res) => {
-  const sql = `SELECT jogosNome , jogosPrice, jogosImg ,jogosPlataforma FROM Jogo `;
+  const sql = `SELECT jogosID, jogosNome , jogosPrice, jogosImg ,jogosPlataforma FROM Jogo `;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -58,7 +58,7 @@ app.get("/catalog", (req, res) => {
 app.get("/catalog/:id", (req, res) => {
   const id = req.params.id;
 
-  const sql = `SELECT jogosNome, jogosPrice, jogosImg ,jogosPlataforma FROM Jogo JOIN Plataforma ON Jogo.jogosPlataforma = Plataforma.plataformaID WHERE Plataforma.plataformaID = '${id}'`;
+  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg ,jogosPlataforma FROM Jogo JOIN Plataforma ON Jogo.jogosPlataforma = Plataforma.plataformaID WHERE Plataforma.plataformaID = '${id}'`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -80,7 +80,7 @@ app.get("/catalog/:id", (req, res) => {
 app.get("/catalog/tipo/:tipo", (req, res) => {
   const tipo = req.params.tipo;
   console.log(`Request for /catalog/tipo/${tipo}`);
-  const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosTipo = '${tipo}'`;
+  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosTipo = '${tipo}'`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -103,9 +103,9 @@ app.get("/catalog/tipo/:tipo", (req, res) => {
 app.get("/catalog/category/:category", (req, res) => {
   const category = req.params.category;
 
-  const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosCategories = '${category}'`;
+  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosCategories = '${category}'`;
 
-  const sqlCount = `SELECT jogosCategories, COUNT(*) AS TotalJogos FROM Jogo WHERE jogosCategories = '${category}' GROUP BY jogosCategories`;
+  const sqlCount = `SELECT jogosID, jogosCategories, COUNT(*) AS TotalJogos FROM Jogo WHERE jogosCategories = '${category}' GROUP BY jogosCategories`;
 
   const categoryname = category;
 
@@ -143,7 +143,7 @@ app.get("/catalog/category/:category", (req, res) => {
 app.get("/catalog/development/:desenvolvedora", (req, res) => {
   const desenvolvedora = req.params.desenvolvedora;
   console.log(desenvolvedora);
-  const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosDesenvolvedora = '${desenvolvedora}'`;
+  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosDesenvolvedora = '${desenvolvedora}'`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -165,7 +165,7 @@ app.get("/catalog/development/:desenvolvedora", (req, res) => {
 app.get("/catalog/price/:price", (req, res) => {
   const price = req.params.price;
 
-  const sql = `SELECT jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo 
+  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo 
                FROM Jogo 
                WHERE jogosPrice < ${price}`;
 
@@ -181,6 +181,36 @@ app.get("/catalog/price/:price", (req, res) => {
       jogos: jogos,
       style: "price.css",
       about: "Price",
+    });
+  });
+});
+
+// ############## JOGO #############
+
+app.get("/game/:id", (req, res) => {
+  const id = req.params.id;
+
+  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo , jogosDescricao ,jogosLancamento, jogosDesenvolvedora,jogosNota
+               FROM Jogo WHERE jogosID = '${id}'`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    if (data.length === 0) {
+      // Não há correspondência para o ID fornecido
+      res.status(404).send("Jogo não encontrado");
+      return;
+    }
+
+    const jogo = data[0];
+
+    res.render("game", {
+      jogo: jogo,
+      style: "game.css",
+      about: "Game",
     });
   });
 });
