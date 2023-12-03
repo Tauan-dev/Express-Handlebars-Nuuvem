@@ -190,7 +190,7 @@ app.get("/catalog/price/:price", (req, res) => {
 app.get("/game/:id", (req, res) => {
   const id = req.params.id;
 
-  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo , jogosDescricao ,jogosLancamento, jogosDesenvolvedora,jogosNota
+  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo , jogosDescricao ,jogosLancamento, jogosDesenvolvedora,jogosCategories, jogosTrailer
                FROM Jogo WHERE jogosID = '${id}'`;
 
   conn.query(sql, (err, data) => {

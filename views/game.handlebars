@@ -1,12 +1,41 @@
-<div class="card-container">
+<div class="banner-group">
+  <img src="{{jogo.jogosImg}}" class="banner-img" />
+  <h1 class="title-game">{{jogo.jogosNome}}</h1>
+</div>
 
+<div class="game-content">
+  <iframe src={{jogo.jogosTrailer}} class="video">
+  </iframe>
   <div class="card">
-    <img src="{{jogo.jogosImg}}" class="card-img-top" alt="" />
-    <div class="card-body card-color">
-      <h6 class="card-title">{{jogo.jogosNome}}</h6>
-      <a href="#" class="btn btn-secondary btn-tamanho">R$
-        {{jogo.jogosPrice}}</a>
+    <h2 class="card-header"> R$ {{jogo.jogosPrice}}</h2>
+    <div class="card-body">
+      <h5 class="card-title">
+        <img
+          src="/assets/home/icons/icons8-estrela-96.png"
+          alt="star"
+          class="icon-star"
+        />{{jogo.jogosNota}}</h5>
+      <p class="card-text">{{jogo.jogosDescricao}}</p>
+      <div class="game-list">
+        <h6> <strong>Desenvolvedor</strong> : {{jogo.jogosDesenvolvedora}}</h6>
+        <h6> <strong>Categoria</strong> : {{jogo.jogosCategories}}</h6>
+
+      </div>
+      <div class="btn-group">
+        <a href="#" class="btn btn-danger" name="compra">Comprar
+          <img
+            src="/assets/home/icons/icons8-comprar-60.png"
+            alt="star"
+            class="icon-star"
+          /></a>
+        <a href="#" class="btn btn-secondary" name="desejo">Desejo
+          <img
+            src="/assets/home/icons/icons8-coração-100.png"
+            alt="star"
+            class="icon-star"
+          /></a>
+      </div>
+
     </div>
   </div>
-
 </div>
