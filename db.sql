@@ -285,3 +285,117 @@ VALUES
     (138000000006, 38); -- Associação para Batman Arkham Collection
 
 select jogosNome, jogosDescricao , jogosPrice from Jogo join ChavesJogos on Jogo.jogosID = ChavesJogos.jogosId where Jogo.jogosPrice < 100;
+
+
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/oBI0MU73nlc' WHERE jogosID = 1;
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/3zeUJaGxe14' WHERE jogosID = 2;
+
+-- Jogo: Hogwarts Legacy
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/1O6Qstncpnc' WHERE jogosID = 3;
+
+-- Jogo: Mortal Kombat 11
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/UoTams2yc0s' WHERE jogosID = 4;
+
+-- Jogo: Batman Arkham Knight
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/lx4oQCHJ1D8' WHERE jogosID = 5;
+
+-- Jogo: Injustice 2 Legendary Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/vZb109HY7MY' WHERE jogosID = 6;
+
+-- Jogo: Baldurs Gate 3
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/o_1WL8B8DBU' WHERE jogosID = 7;
+
+-- Jogo: Lego Harry Potter Collection
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/tiv2tySHzQQ' WHERE jogosID = 8;
+
+-- Jogo: Batman Arkham Collection
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/YsKBRuqhv3M' WHERE jogosID = 9;
+
+-- Jogo: Injustice Gods Among Us Ultimate Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/hMkTQSbE6Bc' WHERE jogosID = 10;
+
+-- Jogo: Naruto Ultimate Ninja Storm 4 Road to Boruto
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/6aomIdYhuhU' WHERE jogosID = 11;
+
+-- Jogo: Middle Earth Shadow of War Definitive Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/bhSfjt8jQyk' WHERE jogosID = 12;
+
+-- Jogo: Duke Nukem 3D World Tour
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/avv5-_ro-GQ' WHERE jogosID = 13;
+
+-- Jogo: Lego DC Super Villains Deluxe Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/UOqYaUQxZIQ' WHERE jogosID = 14;
+
+-- Jogo: Nioh Complete Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/_9PIVYW8u20' WHERE jogosID = 15;
+
+-- Jogo: Minecraft Java
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/qNMfF9TYETM' WHERE jogosID = 16;
+
+-- Jogo: Tekken 8 Ultimate Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/2hPuRQz6IlM' WHERE jogosID = 17;
+
+-- Jogo: Street Fighter 6
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/qqW4ENjH-pg' WHERE jogosID = 18;
+
+-- Jogo: Lego Batman 3 Beyond Gotham Premium Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/8vznzTBvPl4' WHERE jogosID = 19;
+
+-- Jogo: Mortal Kombat X Premium Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/jSi2LDkyKmI' WHERE jogosID = 20;
+
+-- Jogo: Super Mario RPG
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/6umlOfTip4k' WHERE jogosID = 21;
+
+-- Jogo: Eiyuden Chronicle
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/bJ6kJMrfKZ8' WHERE jogosID = 22;
+
+-- Jogo: Lego Marvel Super Heroes 2 Deluxe Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/VWxYyaclTWU' WHERE jogosID = 23;
+
+-- Jogo: Lego Star Wars Skywalker Saga
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/AzjUuIMs5N0' WHERE jogosID = 24;
+
+-- Jogo: Lego Marvel Super Heroes 2
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/TZp3WsNXIUY' WHERE jogosID = 25;
+
+-- Jogo: Lego Indiana Jones
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/-y5ku1b9RcM' WHERE jogosID = 26;
+
+-- Jogo: Batman Arkham City GOTY Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/FCTdm8Nb7Ps' WHERE jogosID = 27;
+
+-- Jogo: Lego Avengers Deluxe Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/hyWbPHrsW_g' WHERE jogosID = 28;
+
+-- Jogo: Pure Farming 2018 Deluxe Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/YSga8NaUOb8' WHERE jogosID = 29;
+
+-- Jogo: One Punch Man Deluxe Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/IZ9z9GLOPqE' WHERE jogosID = 30;
+
+-- Jogo: Gangs of Sherwood
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/zg5b8Obt0P4' WHERE jogosID = 31;
+
+-- Jogo: Naruto Storm Generation Deluxe Edition
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/dq-IOQ8Wrgs' WHERE jogosID = 32;
+
+
+-- Jogo: Super Mario Bros. Wonder
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/XvQNlGKNC6o' WHERE jogosID = 33;
+
+-- Jogo: Call of Duty Modern Warfare 3
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/CHtd3oVt1QE' WHERE jogosID = 34;
+
+-- Jogo: Tales of Arise
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/HQX3sbPahnA' WHERE jogosID = 35;
+
+-- Jogo: SpellForce 3
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/CHdP8FUfqzc' WHERE jogosID = 36;
+
+-- Jogo: My Hero Academia 2
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/eAnljHmNiKk' WHERE jogosID = 37;
+
+-- Jogo: Batman Arkham Collection
+UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/RVD3p_gkaO4' WHERE jogosID = 38;
+
