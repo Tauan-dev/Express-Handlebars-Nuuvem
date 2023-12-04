@@ -348,7 +348,35 @@ app.post("/insert/carrinho", (req, res) => {
   });
 });
 
-// ################### delete ###############
+//    ############### SEARCH #####################
+app.post("/catalog/search", (req, res) => {
+  const search = req.body.search;
+
+  // Consulta SQL corrigida com a tabela e colunas especificadas
+  const sql = `
+    SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo
+    FROM Jogo
+    WHERE jogosNome LIKE '%${search}%'
+  `;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Erro na pesquisa.");
+    }
+
+    const resultadosPesquisa = data;
+
+    // Renderize a página ou envie os resultados da pesquisa para o cliente
+    res.render("search", {
+      jogo: resultadosPesquisa,
+      style: "search.css",
+      about: "search",
+    });
+  });
+});
+
+//   ################### delete ###############
 app.post("/delete/carrinho", (req, res) => {
   const deleteSQL = `DELETE FROM CarrinhoJogo
   WHERE carrinhoID = 1`;
