@@ -7,7 +7,7 @@
           <th scope="col">#</th>
           <th scope="col">Jogo</th>
           <th scope="col">Preço</th>
-          <th scope="col">Ação</th>
+      
           <!-- Adicionado coluna para ação de exclusão -->
         </tr>
       </thead>
@@ -17,19 +17,7 @@
             <th scope="row">{{@index}}</th>
             <td>{{this.jogosNome}}</td>
             <td>R${{this.PrecoJogo}}</td>
-            <td>
-              <form action="/delete/carrinho" method="POST">
-                <div class="btn-group">
-                  <input type="hidden" name="id" value="{{this.jogosID}}" />
-                  <button
-                    class="btn btn-danger"
-                    name="delete"
-                    type="submit"
-                  >Deletar</button>
-                </div>
-              </form>
-
-            </td>
+        
           </tr>
         {{/each}}
       </tbody>

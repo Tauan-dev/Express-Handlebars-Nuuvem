@@ -19,4 +19,11 @@
       {{/each}}
     </tbody>
   </table>
+  <form action="/delete/carrinho" method="POST">
+    <div class="btn-group">
+      <input type="hidden" name="id" value="{{this.jogosID}}" />
+      <button class="btn btn-danger" name="delete" type="submit">Voltar ao
+        inicio</button>
+    </div>
+  </form>
 </div>

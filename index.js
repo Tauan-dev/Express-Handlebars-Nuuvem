@@ -40,19 +40,19 @@ app.get("/login", (req, res) => {
 // Sua rota para /finishbuy
 app.get("/finishbuy", (req, res) => {
   const sql = `SELECT
-    Jogo.jogosNome,
-    Jogo.jogosPrice AS PrecoJogo,
-    MIN(ChavesJogos.chavesID) AS ChaveID
-  FROM
-    Jogo
-  JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
-  JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
-  JOIN ChavesJogos ON CarrinhoJogo.jogoID = ChavesJogos.jogosID
-  JOIN Chaves ON ChavesJogos.chavesID = Chaves.chavesID
-  WHERE
-    Carrinho.carrinhoID = 1
-  GROUP BY
-    Jogo.jogosID, Jogo.jogosNome, Jogo.jogosPrice`;
+      Jogo.jogosNome,
+      Jogo.jogosPrice AS PrecoJogo,
+      MIN(ChavesJogos.chavesID) AS ChaveID
+    FROM
+      Jogo
+    JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+    JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+    JOIN ChavesJogos ON CarrinhoJogo.jogoID = ChavesJogos.jogosID
+    JOIN Chaves ON ChavesJogos.chavesID = Chaves.chavesID
+    WHERE
+      Carrinho.carrinhoID = 1
+    GROUP BY
+      Jogo.jogosID, Jogo.jogosNome, Jogo.jogosPrice`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -350,17 +350,16 @@ app.post("/insert/carrinho", (req, res) => {
 
 // ################### delete ###############
 app.post("/delete/carrinho", (req, res) => {
-  const id = req.body.id;
-  console.log(id);
-  const deleteSQL = `DELETE FROM CarrinhoJogo WHERE carrinhoID = 1 AND jogoID = ${id} `;
+  const deleteSQL = `DELETE FROM CarrinhoJogo
+  WHERE carrinhoID = 1`;
 
-  conn.query(deleteSQL, [id], (err) => {
+  conn.query(deleteSQL, (err) => {
     if (err) {
       console.log(err);
       return res.status(500).send("Erro ao excluir item do carrinho");
     }
     console.log("Jogo removido com sucesso do carrinho");
-    res.redirect("/carrinho");
+    res.redirect("/");
   });
 });
 
