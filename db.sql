@@ -1,4 +1,3 @@
-
 create database nodeGameTeste;
 use nodeGameTeste;
 
@@ -27,25 +26,14 @@ CREATE TABLE Pedidos (
     FOREIGN KEY (pedidosUser) REFERENCES User (userID)
 );
  
--- Tabela Transacao
-CREATE TABLE Transacao (
-    transacaoID INT PRIMARY KEY AUTO_INCREMENT,
-    transacaoData DATE,
-    transacaoValor FLOAT,
-    transacaoStatus VARCHAR(255),
-    transacaoCarrinho INT,
-    transacaoPedido INT,
-    FOREIGN KEY (transacaoCarrinho) REFERENCES Carrinho (carrinhoID),
-    FOREIGN KEY (transacaoPedido) REFERENCES Pedidos (pedidosID)
-);
+
  
--- Tabela Carrinho
-CREATE TABLE Carrinho (
-    carrinhoID INT PRIMARY KEY AUTO_INCREMENT,
-    carrinhoValor FLOAT,
-    carrinhoJogos INT,
-    FOREIGN KEY (carrinhoJogos) REFERENCES Jogo (jogosID)
+ -- Tabela Plataforma
+CREATE TABLE Plataforma (
+    plataformaID INT PRIMARY KEY AUTO_INCREMENT,
+    plataformaNome VARCHAR(255)
 );
+
  
 -- Tabela Jogo
 CREATE TABLE Jogo (
@@ -81,6 +69,15 @@ CREATE TABLE ChavesJogos (
 );
 
 
+ 
+-- Tabela Carrinho
+CREATE TABLE Carrinho (
+    carrinhoID INT PRIMARY KEY AUTO_INCREMENT,
+    carrinhoValor FLOAT,
+    carrinhoJogos INT,
+    FOREIGN KEY (carrinhoJogos) REFERENCES Jogo (jogosID)
+);
+
 
 -- Tabela CarrinhoJogo
 CREATE TABLE CarrinhoJogo (
@@ -91,10 +88,16 @@ CREATE TABLE CarrinhoJogo (
     FOREIGN KEY (jogoID) REFERENCES Jogo (jogosID)
 );
 
--- Tabela Plataforma
-CREATE TABLE Plataforma (
-    plataformaID INT PRIMARY KEY AUTO_INCREMENT,
-    plataformaNome VARCHAR(255)
+-- Tabela Transacao
+CREATE TABLE Transacao (
+    transacaoID INT PRIMARY KEY AUTO_INCREMENT,
+    transacaoData DATE,
+    transacaoValor FLOAT,
+    transacaoStatus VARCHAR(255),
+    transacaoCarrinho INT,
+    transacaoPedido INT,
+    FOREIGN KEY (transacaoCarrinho) REFERENCES Carrinho (carrinhoID),
+    FOREIGN KEY (transacaoPedido) REFERENCES Pedidos (pedidosID)
 );
 
 -- Tabela ListaDesejos
@@ -398,4 +401,3 @@ UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/eAnljHmNiKk' WHERE
 
 -- Jogo: Batman Arkham Collection
 UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/RVD3p_gkaO4' WHERE jogosID = 38;
-
