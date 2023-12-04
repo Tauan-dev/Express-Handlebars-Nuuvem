@@ -50,7 +50,13 @@ npm install nodemon express, express-handlebars mysql bootstrap
 ## Configuração do Banco de Dados
 
 Crie um banco de dados MySQL chamado nuuvem.
-Importe o arquivo nuuvem.sql para criar as tabelas necessárias.
+Importe o arquivo bd.sql para criar as tabelas necessárias.
+
+Após os inserts e Updates no banco, insira um carrinho, onde no workbench :
+
+```bash
+INSERT INTO Carrinho (carrinhoID) VALUES (1);
+```
 
 ## Execução do Projeto
 
