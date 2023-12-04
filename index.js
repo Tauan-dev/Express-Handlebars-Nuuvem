@@ -30,6 +30,20 @@ app.get("/register", (req, res) => {
   });
 });
 
+app.get("/carrinho", (req, res) => {
+  res.render("carrinho", {
+    style: "carrinho.css",
+    about: "Carrinho",
+  });
+});
+
+app.get("/login", (req, res) => {
+  res.render("login", {
+    style: "login.css",
+    about: "Login",
+  });
+});
+
 //   ############### CATALOGO  ###############
 
 app.get("/catalog", (req, res) => {
@@ -42,8 +56,6 @@ app.get("/catalog", (req, res) => {
     }
 
     const jogo = data;
-
-    console.log(jogo);
 
     res.render("catalog", {
       jogo: jogo,
@@ -103,11 +115,19 @@ app.get("/catalog/tipo/:tipo", (req, res) => {
 app.get("/catalog/category/:category", (req, res) => {
   const category = req.params.category;
 
-  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosCategories = '${category}'`;
-
-  const sqlCount = `SELECT jogosID, jogosCategories, COUNT(*) AS TotalJogos FROM Jogo WHERE jogosCategories = '${category}' GROUP BY jogosCategories`;
-
-  const categoryname = category;
+  const sql = `
+    SELECT 
+      jogosID, 
+      jogosNome, 
+      jogosPrice, 
+      jogosImg, 
+      jogosPlataforma, 
+      jogosTipo,
+      COUNT(*) OVER () AS TotalJogos 
+    FROM 
+      Jogo 
+    WHERE 
+      jogosCategories = '${category}'`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -117,23 +137,12 @@ app.get("/catalog/category/:category", (req, res) => {
 
     const jogos = data;
 
-    conn.query(sqlCount, (err, countData) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-
-      const countResult = countData[0] || { TotalJogos: 0 };
-
-      console.log(countResult);
-
-      res.render("category", {
-        jogos: jogos,
-        totalJogos: countResult.TotalJogos,
-        style: "category.css",
-        about: "Category",
-        categoryName: categoryname,
-      });
+    res.render("category", {
+      jogos: jogos,
+      totalJogos: jogos.length > 0 ? jogos[0].TotalJogos : 0,
+      style: "category.css",
+      about: "Category",
+      categoryName: category,
     });
   });
 });
@@ -223,15 +232,52 @@ app.post("/user/register", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  const sql = `INSERT INTO user (userName,userSurname,userAddress, userEmail, userPassword) VALUES ('${name}','${surname}','${adress}', '${email}','${password}') `;
+  // Verificar se o usuário já existe
+  const checkDuplicateSql = `SELECT COUNT(*) AS count FROM user WHERE userEmail = '${email}'`;
+
+  conn.query(checkDuplicateSql, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Erro interno do servidor");
+    }
+
+    const count = result[0].count;
+
+    if (count === 0) {
+      // O email não existe, então podemos inserir o novo usuário
+      const insertSql = `INSERT INTO user (userName, userSurname, userAddress, userEmail, userPassword) VALUES ('${name}', '${surname}', '${adress}', '${email}', '${password}')`;
+
+      conn.query(insertSql, (err) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send("Erro interno do servidor");
+        }
+
+        console.log("Usuário inserido com sucesso");
+        res.redirect("/");
+      });
+    } else {
+      console.log("Usuário com este email já existe.");
+
+      res.status(400).send("Usuário com este email já existe.");
+    }
+  });
+});
+
+// ###################### INSERT NO CARRINHO ####################
+
+app.post("/insert/carrinho", (req, res) => {
+  const id = req.body.id;
+
+  const sql = `INSERT INTO CarrinhoJogo (carrinhoID, jogoID) VALUES (1, ${id})`;
 
   conn.query(sql, (err) => {
     if (err) {
       console.log(err);
-      return;
+      return res.status(500).send("Erro ao inserir jogo no carrinho");
     }
-    console.log("User Inserted");
-    res.redirect("/");
+    console.log("Jogo inserido com sucesso no carrinho");
+    res.redirect("/catalog");
   });
 });
 

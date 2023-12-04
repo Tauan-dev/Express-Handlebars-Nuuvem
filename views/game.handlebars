@@ -21,20 +21,28 @@
         <h6> <strong>Categoria</strong> : {{jogo.jogosCategories}}</h6>
 
       </div>
-      <div class="btn-group">
-        <a href="#" class="btn btn-danger" name="compra">Comprar
-          <img
-            src="/assets/home/icons/icons8-comprar-60.png"
-            alt="star"
-            class="icon-star"
-          /></a>
-        <a href="#" class="btn btn-secondary" name="desejo">Desejo
-          <img
-            src="/assets/home/icons/icons8-coração-100.png"
-            alt="star"
-            class="icon-star"
-          /></a>
-      </div>
+      <form action="/insert/carrinho" method="POST">
+        <input type="hidden" name="id" value="{{jogo.jogosID}}" />
+        <div class="btn-group">
+          <button
+            href=""
+            class="btn btn-danger"
+            name="compra"
+            type="submit"
+          >Comprar
+            <img
+              src="/assets/home/icons/icons8-comprar-60.png"
+              alt="star"
+              class="icon-star"
+            /></button>
+          <a href="#" class="btn btn-secondary" name="desejo">Desejo
+            <img
+              src="/assets/home/icons/icons8-coração-100.png"
+              alt="star"
+              class="icon-star"
+            /></a>
+        </div>
+      </form>
 
     </div>
   </div>
