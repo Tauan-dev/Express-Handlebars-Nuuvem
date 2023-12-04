@@ -323,7 +323,7 @@ app.post("/insert/carrinho", (req, res) => {
   const carrinhoID = 1; // Defina o carrinhoID conforme necessário
 
   const checkIfExistsSQL = `SELECT * FROM CarrinhoJogo WHERE carrinhoID = ? AND jogoID = ?`;
-  const insertSQL = `INSERT INTO CarrinhoJogo (carrinhoID, jogoID) VALUES (?, ?)`;
+  const insertSQL = `INSERT INTO CarrinhoJogo (carrinhoID, jogoID) VALUES (1, '${id}')`;
 
   conn.query(checkIfExistsSQL, [carrinhoID, id], (err, result) => {
     if (err) {
