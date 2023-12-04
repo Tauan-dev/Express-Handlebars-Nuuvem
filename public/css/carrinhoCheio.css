@@ -28,7 +28,7 @@ h2 {
   justify-content: center;
   text-align: center;
   margin-left: 30px;
-  max-width: 741px;
+  min-width: 500px;
   min-height: 345px;
   border-radius: 5px;
 }
@@ -55,4 +55,8 @@ h2 {
   width: 600px;
   margin-left: 60px;
   border-radius: 5px;
+}
+
+.table {
+  padding: 30px;
 }

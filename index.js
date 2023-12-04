@@ -30,17 +30,70 @@ app.get("/register", (req, res) => {
   });
 });
 
-app.get("/carrinho", (req, res) => {
-  res.render("carrinho", {
-    style: "carrinho.css",
-    about: "Carrinho",
-  });
-});
-
 app.get("/login", (req, res) => {
   res.render("login", {
     style: "login.css",
     about: "Login",
+  });
+});
+
+// Sua rota para /finishbuy
+app.get("/finishbuy", (req, res) => {
+  const sql = `SELECT
+    Jogo.jogosNome,
+    Jogo.jogosPrice AS PrecoJogo,
+    MIN(ChavesJogos.chavesID) AS ChaveID
+  FROM
+    Jogo
+  JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+  JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+  JOIN ChavesJogos ON CarrinhoJogo.jogoID = ChavesJogos.jogosID
+  JOIN Chaves ON ChavesJogos.chavesID = Chaves.chavesID
+  WHERE
+    Carrinho.carrinhoID = 1
+  GROUP BY
+    Jogo.jogosID, Jogo.jogosNome, Jogo.jogosPrice`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    const jogo = data;
+    res.render("finishbuy", {
+      jogo: jogo,
+      style: "finishbuy.css",
+      about: "Finish",
+    });
+  });
+});
+
+// ################ carrinho #########
+
+app.get("/carrinho", (req, res) => {
+  const sql = `
+    SELECT CarrinhoJogo.JogoID, Jogo.jogosNome, Jogo.jogosPrice AS PrecoJogo
+    FROM  Jogo
+    JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+    JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+    WHERE Carrinho.carrinhoID = 1`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Erro ao recuperar dados do carrinho.");
+    }
+
+    const jogo = data;
+    const total = jogo.reduce((acc, jogo) => acc + jogo.PrecoJogo, 0);
+
+    res.render("carrinho", {
+      jogo: jogo,
+      total: total,
+      style: "carrinho.css",
+      about: "Carrinho",
+    });
   });
 });
 
@@ -265,19 +318,49 @@ app.post("/user/register", (req, res) => {
 });
 
 // ###################### INSERT NO CARRINHO ####################
-
 app.post("/insert/carrinho", (req, res) => {
   const id = req.body.id;
+  const carrinhoID = 1; // Defina o carrinhoID conforme necessário
 
-  const sql = `INSERT INTO CarrinhoJogo (carrinhoID, jogoID) VALUES (1, ${id})`;
+  const checkIfExistsSQL = `SELECT * FROM CarrinhoJogo WHERE carrinhoID = ? AND jogoID = ?`;
+  const insertSQL = `INSERT INTO CarrinhoJogo (carrinhoID, jogoID) VALUES (?, ?)`;
 
-  conn.query(sql, (err) => {
+  conn.query(checkIfExistsSQL, [carrinhoID, id], (err, result) => {
     if (err) {
       console.log(err);
-      return res.status(500).send("Erro ao inserir jogo no carrinho");
+      return res.status(500).send("Erro interno do servidor");
     }
-    console.log("Jogo inserido com sucesso no carrinho");
-    res.redirect("/catalog");
+
+    if (result.length === 0) {
+      // O registro não existe, então podemos inserir
+      conn.query(insertSQL, [carrinhoID, id], (err) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send("Erro ao inserir jogo no carrinho");
+        }
+        console.log("Jogo inserido com sucesso no carrinho");
+        res.redirect("/catalog");
+      });
+    } else {
+      console.log("O jogo já está no carrinho");
+      res.redirect("/catalog");
+    }
+  });
+});
+
+// ################### delete ###############
+app.post("/delete/carrinho", (req, res) => {
+  const id = req.body.id;
+  console.log(id);
+  const deleteSQL = `DELETE FROM CarrinhoJogo WHERE carrinhoID = 1 AND jogoID = ${id} `;
+
+  conn.query(deleteSQL, [id], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Erro ao excluir item do carrinho");
+    }
+    console.log("Jogo removido com sucesso do carrinho");
+    res.redirect("/carrinho");
   });
 });
 

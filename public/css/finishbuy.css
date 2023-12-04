@@ -1,5 +1,5 @@
 main {
-  min-height: 1100px;
+  min-height: 900px;
   background: linear-gradient(
     180deg,
     #1d5d76 8.24%,
@@ -32,7 +32,6 @@ h2 {
   max-width: 741px;
   min-height: 545px;
   border-radius: 5px;
-  padding: 10px;
 }
 
 .back-home {
