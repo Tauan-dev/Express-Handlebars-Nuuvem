@@ -1,3 +1,4 @@
+
 create database nodeGameTeste;
 use nodeGameTeste;
 
@@ -26,14 +27,25 @@ CREATE TABLE Pedidos (
     FOREIGN KEY (pedidosUser) REFERENCES User (userID)
 );
  
-
- 
- -- Tabela Plataforma
-CREATE TABLE Plataforma (
-    plataformaID INT PRIMARY KEY AUTO_INCREMENT,
-    plataformaNome VARCHAR(255)
+-- Tabela Transacao
+CREATE TABLE Transacao (
+    transacaoID INT PRIMARY KEY AUTO_INCREMENT,
+    transacaoData DATE,
+    transacaoValor FLOAT,
+    transacaoStatus VARCHAR(255),
+    transacaoCarrinho INT,
+    transacaoPedido INT,
+    FOREIGN KEY (transacaoCarrinho) REFERENCES Carrinho (carrinhoID),
+    FOREIGN KEY (transacaoPedido) REFERENCES Pedidos (pedidosID)
 );
-
+ 
+-- Tabela Carrinho
+CREATE TABLE Carrinho (
+    carrinhoID INT PRIMARY KEY AUTO_INCREMENT,
+    carrinhoValor FLOAT,
+    carrinhoJogos INT,
+    FOREIGN KEY (carrinhoJogos) REFERENCES Jogo (jogosID)
+);
  
 -- Tabela Jogo
 CREATE TABLE Jogo (
@@ -69,15 +81,6 @@ CREATE TABLE ChavesJogos (
 );
 
 
- 
--- Tabela Carrinho
-CREATE TABLE Carrinho (
-    carrinhoID INT PRIMARY KEY AUTO_INCREMENT,
-    carrinhoValor FLOAT,
-    carrinhoJogos INT,
-    FOREIGN KEY (carrinhoJogos) REFERENCES Jogo (jogosID)
-);
-
 
 -- Tabela CarrinhoJogo
 CREATE TABLE CarrinhoJogo (
@@ -88,17 +91,13 @@ CREATE TABLE CarrinhoJogo (
     FOREIGN KEY (jogoID) REFERENCES Jogo (jogosID)
 );
 
--- Tabela Transacao
-CREATE TABLE Transacao (
-    transacaoID INT PRIMARY KEY AUTO_INCREMENT,
-    transacaoData DATE,
-    transacaoValor FLOAT,
-    transacaoStatus VARCHAR(255),
-    transacaoCarrinho INT,
-    transacaoPedido INT,
-    FOREIGN KEY (transacaoCarrinho) REFERENCES Carrinho (carrinhoID),
-    FOREIGN KEY (transacaoPedido) REFERENCES Pedidos (pedidosID)
+-- Tabela Plataforma
+CREATE TABLE Plataforma (
+    plataformaID INT PRIMARY KEY AUTO_INCREMENT,
+    plataformaNome VARCHAR(255)
 );
+
+
 
 -- Tabela ListaDesejos
 CREATE TABLE ListaDesejos (
@@ -107,6 +106,20 @@ CREATE TABLE ListaDesejos (
     FOREIGN KEY (desejoJogos) REFERENCES Jogo (jogosID)
 );
 
+ALTER TABLE Carrinho
+ADD COLUMN carrinhoUser INT,
+ADD FOREIGN KEY (carrinhoUser) REFERENCES User (userID);
+
+UPDATE Carrinho SET carrinhoUser = 4;
+
+SELECT * FROM User WHERE userID = 4;
+
+
+
+drop table plataforma;
+drop table chaves;
+drop table carrinho;
+drop table jogo;
 
 
 -- Inserindo os dados
@@ -198,100 +211,10 @@ VALUES
 ('Batman Arkham Collection', 'Experimente a trilogia épica do Cavaleiro das Trevas com a Batman Arkham Collection. Incluindo Arkham Asylum, Arkham City e Arkham Knight, esta coleção oferece uma jornada completa pelo mundo sombrio e perigoso do Batman. Com gráficos aprimorados, jogabilidade cativante e uma história imersiva, esta é a oportunidade perfeita para se tornar o Batman e enfrentar os maiores desafios de Gotham.', '2015-11-25', 'Rocksteady Studios, WB Games', 9.5, 4, 80, '/assets/home/jogos/batman-arkham-collection.jpg', 'assinatura','Ação','https://www.youtube.com/watch?v=RVD3p_gkaO4');
 
 
-
-
-
--- Inserindo chaves para os jogos restantes
-INSERT INTO Chaves (chavesID)
-VALUES 
-    (101000000001),
-    (102000000002),
-    (103000000003),
-    (104000000004),
-    (105000000005),
-    (106000000006),
-    (107000000007),
-    (108000000008),
-    (109000000009),
-    (110000000010),
-    (111000000011),
-    (112000000012),
-    (113000000013),
-    (114000000014),
-    (115000000015),
-    (116000000016),
-    (117000000017),
-    (118000000018),
-    (119000000019),
-    (120000000020),
-    (121000000021),
-    (122000000022),
-    (123000000023),
-    (124000000024),
-    (125000000025),
-    (126000000026),
-    (127000000027),
-    (128000000028),
-    (129000000029),
-    (130000000030),
-    (131000000031),
-    (132000000032),
-    (133000000033),
-    (134000000034),
-    (135000000006), -- Chaves para Tales of Arise
-    (136000000006), -- Chaves para SpellForce 3
-    (137000000006), -- Chaves para My Hero Academia 2
-    (138000000006); -- Chaves para Batman Arkham Collection
-
-
-    -- Associando chaves aos jogos restantes
--- Associações entre as chaves e os jogos na tabela ChavesJogos
-INSERT INTO ChavesJogos (chavesID, jogosID)
-VALUES 
-    (101000000001, 1),    -- Dragon Ball Fighter Z
-    (102000000002, 2),    -- Dying Light Definitive Edition
-    (103000000003, 3),    -- Hogwarts Legacy
-    (104000000004, 4),    -- Mortal Kombat 11
-    (105000000005, 5),    -- Batman Arkham Knight
-    (106000000006, 6),    -- Injustice 2 Legendary Edition
-    (107000000007, 7),    -- Baldurs Gate 3
-    (108000000008, 8),    -- Lego Harry Potter Collection
-    (109000000009, 9),    -- Batman Arkham Collection
-    (110000000010, 10),   -- Injustice Gods Among Us Ultimate Edition
-    (111000000011, 11),   -- Naruto Ultimate Ninja Storm 4 Road to Boruto
-    (112000000012, 12),   -- Middle Earth Shadow of War Definitive Edition
-    (113000000013, 13),   -- Duke Nukem 3D World Tour
-    (114000000014, 14),   -- Lego DC Super Villains Deluxe Edition
-    (115000000015, 15),   -- Nioh Complete Edition
-    (116000000016, 16),   -- Minecraft Java
-    (117000000017, 17),   -- Tekken 8 Ultimate Edition
-    (118000000018, 18),   -- Street Fighter 6
-    (119000000019, 19),   -- Lego Batman 3 Beyond Gotham Premium Edition
-    (120000000020, 20),   -- Mortal Kombat X Premium Edition
-    (121000000021, 21),   -- Super Mario RPG
-    (122000000022, 22),   -- Eiyuden Chronicle
-    (123000000023, 23),   -- Lego Marvel Super Heroes 2 Deluxe Edition
-    (124000000024, 24),   -- Lego Star Wars Skywalker Saga
-    (125000000025, 25),   -- Lego Marvel Super Heroes 2
-    (126000000026, 26),   -- Lego Indiana Jones
-    (127000000027, 27),   -- Batman Arkham City GOTY Edition
-    (128000000028, 28),   -- Lego Avengers Deluxe Edition
-    (129000000029, 29),   -- Pure Farming 2018 Deluxe Edition
-    (130000000030, 30),   -- One Punch Man Deluxe Edition
-    (131000000031, 31),   -- Gangs of Sherwood
-    (132000000032, 32),   -- Naruto Storm Generation Deluxe Edition
-    (133000000033, 33),   -- Super Mario Bros. Wonder
-    (134000000034, 34),   -- Call of Duty Modern Warfare 3
-    (135000000006, 35), -- Associação para Tales of Arise
-    (136000000006, 36), -- Associação para SpellForce 3
-    (137000000006, 37), -- Associação para My Hero Academia 2
-    (138000000006, 38); -- Associação para Batman Arkham Collection
-
-select jogosNome, jogosDescricao , jogosPrice from Jogo join ChavesJogos on Jogo.jogosID = ChavesJogos.jogosId where Jogo.jogosPrice < 100;
-
-
 UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/oBI0MU73nlc' WHERE jogosID = 1;
 UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/3zeUJaGxe14' WHERE jogosID = 2;
+
+select*from user;
 
 -- Jogo: Hogwarts Legacy
 UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/1O6Qstncpnc' WHERE jogosID = 3;
@@ -401,3 +324,186 @@ UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/eAnljHmNiKk' WHERE
 
 -- Jogo: Batman Arkham Collection
 UPDATE Jogo SET jogosTrailer = 'https://www.youtube.com/embed/RVD3p_gkaO4' WHERE jogosID = 38;
+
+
+
+-- Inserindo chaves para os jogos restantes
+INSERT INTO Chaves (chavesID)
+VALUES 
+    (101000000001),
+    (102000000002),
+    (103000000003),
+    (104000000004),
+    (105000000005),
+    (106000000006),
+    (107000000007),
+    (108000000008),
+    (109000000009),
+    (110000000010),
+    (111000000011),
+    (112000000012),
+    (113000000013),
+    (114000000014),
+    (115000000015),
+    (116000000016),
+    (117000000017),
+    (118000000018),
+    (119000000019),
+    (120000000020),
+    (121000000021),
+    (122000000022),
+    (123000000023),
+    (124000000024),
+    (125000000025),
+    (126000000026),
+    (127000000027),
+    (128000000028),
+    (129000000029),
+    (130000000030),
+    (131000000031),
+    (132000000032),
+    (133000000033),
+    (134000000034),
+    (135000000006), -- Chaves para Tales of Arise
+    (136000000006), -- Chaves para SpellForce 3
+    (137000000006), -- Chaves para My Hero Academia 2
+    (138000000006); -- Chaves para Batman Arkham Collection
+
+
+    -- Associando chaves aos jogos restantes
+-- Associações entre as chaves e os jogos na tabela ChavesJogos
+INSERT INTO ChavesJogos (chavesID, jogosID)
+VALUES 
+    (101000000001, 1),    -- Dragon Ball Fighter Z
+    (102000000002, 2),    -- Dying Light Definitive Edition
+    (103000000003, 3),    -- Hogwarts Legacy
+    (104000000004, 4),    -- Mortal Kombat 11
+    (105000000005, 5),    -- Batman Arkham Knight
+    (106000000006, 6),    -- Injustice 2 Legendary Edition
+    (107000000007, 7),    -- Baldurs Gate 3
+    (108000000008, 8),    -- Lego Harry Potter Collection
+    (109000000009, 9),    -- Batman Arkham Collection
+    (110000000010, 10),   -- Injustice Gods Among Us Ultimate Edition
+    (111000000011, 11),   -- Naruto Ultimate Ninja Storm 4 Road to Boruto
+    (112000000012, 12),   -- Middle Earth Shadow of War Definitive Edition
+    (113000000013, 13),   -- Duke Nukem 3D World Tour
+    (114000000014, 14),   -- Lego DC Super Villains Deluxe Edition
+    (115000000015, 15),   -- Nioh Complete Edition
+    (116000000016, 16),   -- Minecraft Java
+    (117000000017, 17),   -- Tekken 8 Ultimate Edition
+    (118000000018, 18),   -- Street Fighter 6
+    (119000000019, 19),   -- Lego Batman 3 Beyond Gotham Premium Edition
+    (120000000020, 20),   -- Mortal Kombat X Premium Edition
+    (121000000021, 21),   -- Super Mario RPG
+    (122000000022, 22),   -- Eiyuden Chronicle
+    (123000000023, 23),   -- Lego Marvel Super Heroes 2 Deluxe Edition
+    (124000000024, 24),   -- Lego Star Wars Skywalker Saga
+    (125000000025, 25),   -- Lego Marvel Super Heroes 2
+    (126000000026, 26),   -- Lego Indiana Jones
+    (127000000027, 27),   -- Batman Arkham City GOTY Edition
+    (128000000028, 28),   -- Lego Avengers Deluxe Edition
+    (129000000029, 29),   -- Pure Farming 2018 Deluxe Edition
+    (130000000030, 30),   -- One Punch Man Deluxe Edition
+    (131000000031, 31),   -- Gangs of Sherwood
+    (132000000032, 32),   -- Naruto Storm Generation Deluxe Edition
+    (133000000033, 33),   -- Super Mario Bros. Wonder
+    (134000000034, 34),   -- Call of Duty Modern Warfare 3
+    (135000000006, 35), -- Associação para Tales of Arise
+    (136000000006, 36), -- Associação para SpellForce 3
+    (137000000006, 37), -- Associação para My Hero Academia 2
+    (138000000006, 38); -- Associação para Batman Arkham Collection
+
+select jogosNome, jogosDescricao , jogosPrice from Jogo join ChavesJogos on Jogo.jogosID = ChavesJogos.jogosId where Jogo.jogosPrice < 100;
+
+select jogosNome, jogosDescricao , jogosPrice from Jogo join ChavesJogos on Jogo.jogosID = ChavesJogos.jogosId where Jogo.jogosPrice < 100;
+
+
+select jogosId, jogosNome from Jogo;
+
+select* from user;
+
+select * from Jogo;
+
+delete from user where userId = 2 ;
+
+SELECT jogosNome FROM Jogo ;
+
+
+SELECT
+    Jogo.jogosNome,
+    Jogo.jogosPrice AS PrecoJogo,
+    MIN(ChavesJogos.chavesID) AS ChaveID
+FROM
+    Jogo
+JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+JOIN ChavesJogos ON CarrinhoJogo.jogoID = ChavesJogos.jogosID
+JOIN Chaves ON ChavesJogos.chavesID = Chaves.chavesID
+WHERE
+    Carrinho.carrinhoID = 1
+GROUP BY
+    Jogo.jogosID, Jogo.jogosNome, Jogo.jogosPrice;
+
+
+Delete FROM CarrinhoJogo WHERE carrinhoID = 1 AND jogoID = 1;
+
+select * from CarrinhoJogo;
+
+SELECT
+  Carrinho.carrinhoID,
+  Jogo.jogosNome,
+  SUM(Jogo.jogosPrice) AS PrecoTotal
+FROM
+  Jogo
+  JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+  JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+WHERE
+  Carrinho.carrinhoID = 1
+GROUP BY
+  Carrinho.carrinhoID, 
+  Jogo.jogosNome
+WITH ROLLUP
+HAVING Carrinho.carrinhoID IS NOT NULL OR Jogo.jogosNome IS NOT NULL;
+
+INSERT INTO Carrinho (carrinhoID) VALUES (1);
+select * from carrinhojogo;
+
+SELECT carrinhojogo.JogoID, Jogo.jogosNome, Jogo.jogosPrice 
+FROM Jogo
+JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+WHERE Carrinho.carrinhoID = 1;
+
+
+SELECT Jogo.jogosNome, Jogo.jogosPrice AS PrecoJogo
+FROM Jogo
+JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID WHERE carrinho.carrinhoID=1;
+
+SELECT Jogo.jogosNome, Jogo.jogosPrice AS PrecoJogo, ChavesJogos.chavesID
+FROM Jogo
+JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+JOIN ChavesJogos ON CarrinhoJogo.jogoID = ChavesJogos.jogosID
+JOIN Chaves ON ChavesJogos.chavesID = Chaves.chavesID WHERE carrinho.carrinhoID=1 
+;
+
+
+SELECT 
+    u.userID,
+    u.userName,
+    u.userSurname,
+    u.userEmail,
+    u.userAddress,
+    c.carrinhoID,
+    cj.jogoID,
+    j.jogosNome,
+    j.jogosDesenvolvedora,
+    j.jogosTipo,
+    j.jogosCategories,
+    j.jogosPrice,
+    j.jogosImg
+FROM User u
+LEFT JOIN Carrinho c ON u.userID = c.carrinhoUser
+LEFT JOIN CarrinhoJogo cj ON c.carrinhoID = cj.carrinhoID
+LEFT JOIN Jogo j ON cj.jogoID = j.jogosID;
