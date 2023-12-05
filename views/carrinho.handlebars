@@ -1,56 +1,78 @@
+<!-- Parte do código do front-end -->
 <h1>MEU CARRINHO</h1>
-<div class="market-container">
-  <form action="/delete/carrinho" method="POST">
-    <table class="table table-hover table-bordered table-dark tb-color">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Jogo</th>
-          <th scope="col">Preço</th>
-      
-          <!-- Adicionado coluna para ação de exclusão -->
-        </tr>
-      </thead>
-      <tbody>
-        {{#each jogo}}
-          <tr>
-            <th scope="row">{{@index}}</th>
-            <td>{{this.jogosNome}}</td>
-            <td>R${{this.PrecoJogo}}</td>
-        
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </form>
 
-  <h3>Total: R$ {{total}}</h3>
-  <a>
+<div class="compra">
+  <div class="market-container">
+    <form action="/delete/carrinho" method="POST">
+      <table class="table table-hover table-bordered table-dark tb-color">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Jogo</th>
+            <th scope="col">Preço</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each carrinhoData}}
+            <tr>
+              {{#if this.jogosNome}}
+                <th scope="row">{{@index}}</th>
+                <td>{{this.jogosNome}}</td>
+              {{else}}
+                <th scope="row"> $$ </th>
+                <td>Total</td>
+              {{/if}}
+              <td>R${{this.PrecoTotal}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </form>
+
+    {{#unless carrinhoData.length}}
+      <h3>Carrinho vazio （；´д｀）ゞ</h3>
+    {{/unless}}
+
     <div class="btn-group">
       <a
         href="http://localhost:3000/finishbuy"
         class="btn btn-success"
         name="finish"
-        
       >Finalizar compra</a>
     </div>
+  </div>
 
+  {{#if maxInfo}}
+    <div class="market-container">
+      <!-- Jogo mais caro -->
+      <h3>Jogo mais caro do carrinho: </h3>
+      <h5>{{maxInfo.jogosNome}} - R$ {{maxInfo.jogosPrice}}</h5>
+      <img src="{{maxInfo.jogosImg}}" alt="Imagem do jogo mais caro" />
+
+      <!-- Jogo mais barato -->
+      <h3>Jogo mais barato do carrinho: </h3>
+      <h5>{{minInfo.jogosNome}} - R$ {{minInfo.jogosPrice}}</h5>
+      <img src="{{minInfo.jogosImg}}" alt="Imagem do jogo mais barato" />
+    </div>
+  {{/if}}
 </div>
 
+<div class="informacao">
   <div class="info-container">
-        <ul>
-          Informações importantes:
-          <li>
-            Todos os itens são entregues apenas de forma digital por download ou
-            créditos direto na conta e estão sujeitos à política de reembolso.
-          </li>
-          <li>
-            Verifique os requisitos de sistema na página de cada jogo e os
-            Termos de Uso antes de realizar a compra.
-          </li>
-          <li>
-            Alguns itens possuem limite temporário de compra e podem levar em
-            torno de 2 dias para poder fazer uma nova compra do mesmo item.
-          </li>
-        </ul>
-      </div>
+    <ul>
+      <h3>Informações importantes:</h3>
+      <li>
+        Todos os itens são entregues apenas de forma digital por download ou
+        créditos direto na conta e estão sujeitos à política de reembolso.
+      </li>
+      <li>
+        Verifique os requisitos de sistema na página de cada jogo e os Termos de
+        Uso antes de realizar a compra.
+      </li>
+      <li>
+        Alguns itens possuem limite temporário de compra e podem levar em torno
+        de 2 dias para poder fazer uma nova compra do mesmo item.
+      </li>
+    </ul>
+  </div>
+</div>

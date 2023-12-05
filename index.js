@@ -69,30 +69,97 @@ app.get("/finishbuy", (req, res) => {
   });
 });
 
-// ################ carrinho #########
+// ################ carrinho ##############
 
 app.get("/carrinho", (req, res) => {
-  const sql = `
-    SELECT CarrinhoJogo.JogoID, Jogo.jogosNome, Jogo.jogosPrice AS PrecoJogo
-    FROM  Jogo
-    JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
-    JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
-    WHERE Carrinho.carrinhoID = 1`;
+  const carrinhoID = 1; // Substitua pelo carrinho desejado
 
-  conn.query(sql, (err, data) => {
+  // Consulta para obter os jogos no carrinho com o total de preço
+  const sqlJogos = `
+    SELECT
+      Carrinho.carrinhoID,
+      Jogo.jogosNome,
+      SUM(Jogo.jogosPrice) AS PrecoTotal
+    FROM
+      Jogo
+      JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+      JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+    WHERE
+      Carrinho.carrinhoID = ${carrinhoID}
+    GROUP BY
+      Carrinho.carrinhoID, 
+      Jogo.jogosNome
+    WITH ROLLUP
+    HAVING Carrinho.carrinhoID IS NOT NULL OR Jogo.jogosNome IS NOT NULL`;
+
+  conn.query(sqlJogos, (err, data) => {
     if (err) {
       console.log(err);
       return res.status(500).send("Erro ao recuperar dados do carrinho.");
     }
 
-    const jogo = data;
-    const total = jogo.reduce((acc, jogo) => acc + jogo.PrecoJogo, 0);
+    const carrinhoData = data;
+    const total = carrinhoData.reduce((acc, jogo) => acc + jogo.PrecoTotal, 0);
 
-    res.render("carrinho", {
-      jogo: jogo,
-      total: total,
-      style: "carrinho.css",
-      about: "Carrinho",
+    // Consulta para obter o jogo mais caro no carrinho específico
+    const sqlMaxPrice = `
+      SELECT
+        Jogo.jogosID,
+        Jogo.jogosNome,
+        Jogo.jogosImg,
+        Jogo.jogosPrice
+      FROM
+        Jogo
+        JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+        JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+      WHERE
+        Carrinho.carrinhoID = ${carrinhoID}
+      ORDER BY Jogo.jogosPrice DESC
+      LIMIT 1
+    `;
+
+    conn.query(sqlMaxPrice, (errMax, dataMax) => {
+      if (errMax) {
+        console.log(errMax);
+        return res.status(500).send("Erro ao recuperar dados do carrinho.");
+      }
+
+      const maxInfo = dataMax[0];
+
+      // Consulta para obter o jogo mais barato no carrinho específico
+      const sqlMinPrice = `
+        SELECT
+          Jogo.jogosID,
+          Jogo.jogosNome,
+          Jogo.jogosImg,
+          Jogo.jogosPrice
+        FROM
+          Jogo
+          JOIN CarrinhoJogo ON Jogo.jogosID = CarrinhoJogo.jogoID
+          JOIN Carrinho ON CarrinhoJogo.carrinhoID = Carrinho.carrinhoID
+        WHERE
+          Carrinho.carrinhoID = ${carrinhoID}
+        ORDER BY Jogo.jogosPrice ASC
+        LIMIT 1
+      `;
+
+      conn.query(sqlMinPrice, (errMin, dataMin) => {
+        if (errMin) {
+          console.log(errMin);
+          return res.status(500).send("Erro ao recuperar dados do carrinho.");
+        }
+
+        const minInfo = dataMin[0];
+
+        res.render("carrinho", {
+          carrinhoData: carrinhoData,
+          total: total,
+          maxInfo: maxInfo,
+          minInfo: minInfo,
+          style: "carrinho.css",
+          about: "Carrinho",
+        });
+      });
     });
   });
 });
