@@ -37,7 +37,7 @@ app.get("/login", (req, res) => {
   });
 });
 
-// Sua rota para /finishbuy
+// ############## FINALIZAR COMPRA #############
 app.get("/finishbuy", (req, res) => {
   const sql = `SELECT
       Jogo.jogosNome,
@@ -164,7 +164,7 @@ app.get("/carrinho", (req, res) => {
   });
 });
 
-//   ############### CATALOGO  ###############
+//   ###############  CATALOGO  ###############
 
 app.get("/catalog", (req, res) => {
   const sql = `SELECT jogosID, jogosNome , jogosPrice, jogosImg ,jogosPlataforma FROM Jogo `;
@@ -185,12 +185,20 @@ app.get("/catalog", (req, res) => {
   });
 });
 
-// ###############  PLATAFORMA  ###############
+// ############### SELECT CATALOGO POR PLATAFORMA COM JOIN ###############
 
 app.get("/catalog/:id", (req, res) => {
   const id = req.params.id;
 
-  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg ,jogosPlataforma FROM Jogo JOIN Plataforma ON Jogo.jogosPlataforma = Plataforma.plataformaID WHERE Plataforma.plataformaID = '${id}'`;
+  const sql = `SELECT jogosID, 
+                  jogosNome, 
+                  jogosPrice, 
+                  jogosImg ,
+                  jogosPlataforma 
+                FROM Jogo 
+                JOIN Plataforma 
+                ON Jogo.jogosPlataforma = Plataforma.plataformaID 
+                WHERE Plataforma.plataformaID = '${id}'`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -207,11 +215,11 @@ app.get("/catalog/:id", (req, res) => {
   });
 });
 
-//  ###############  TIPO  ###############
+//  ############### SELECT CATALOGO POR TIPO  ###############
 
 app.get("/catalog/tipo/:tipo", (req, res) => {
   const tipo = req.params.tipo;
-  console.log(`Request for /catalog/tipo/${tipo}`);
+
   const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosTipo = '${tipo}'`;
 
   conn.query(sql, (err, data) => {
@@ -230,7 +238,7 @@ app.get("/catalog/tipo/:tipo", (req, res) => {
   });
 });
 
-// ###############  CATEGORIA  ###############
+// ############### SELECT CATALOGO POR CATEGORIA COM COUNT ###############
 
 app.get("/catalog/category/:category", (req, res) => {
   const category = req.params.category;
@@ -267,12 +275,19 @@ app.get("/catalog/category/:category", (req, res) => {
   });
 });
 
-//  ############### DESENVOLVEDORA  ###############
+//  ###############  SELECT CATALOGO POR DESENVOLVEDORA  ###############
 
 app.get("/catalog/development/:desenvolvedora", (req, res) => {
   const desenvolvedora = req.params.desenvolvedora;
   console.log(desenvolvedora);
-  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo FROM Jogo WHERE jogosDesenvolvedora = '${desenvolvedora}'`;
+  const sql = `SELECT jogosID, 
+                      jogosNome,  
+                      jogosPrice, 
+                      jogosImg, 
+                      jogosPlataforma, 
+                      jogosTipo 
+                FROM Jogo 
+                WHERE jogosDesenvolvedora = '${desenvolvedora}'`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -291,10 +306,17 @@ app.get("/catalog/development/:desenvolvedora", (req, res) => {
   });
 });
 
+// ############## SELECT CATALOGO POR PREÇO #################
+
 app.get("/catalog/price/:price", (req, res) => {
   const price = req.params.price;
 
-  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo 
+  const sql = `SELECT jogosID, 
+                      jogosNome, 
+                      jogosPrice, 
+                      jogosImg, 
+                      jogosPlataforma, 
+                      jogosTipo 
                FROM Jogo 
                WHERE jogosPrice < ${price}`;
 
@@ -314,13 +336,25 @@ app.get("/catalog/price/:price", (req, res) => {
   });
 });
 
-// ############## JOGO #############
+// ##################### ROTA JOGO SEPARADO ######################
 
 app.get("/game/:id", (req, res) => {
   const id = req.params.id;
 
-  const sql = `SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo , jogosDescricao ,jogosLancamento, jogosDesenvolvedora,jogosCategories, jogosTrailer
-               FROM Jogo WHERE jogosID = '${id}'`;
+  const sql = `SELECT jogosID, 
+                      jogosNome, 
+                      jogosPrice, 
+                      jogosImg, 
+                      jogosPlataforma, 
+                      jogosTipo,
+                      jogosNota, 
+                      jogosDescricao,
+                      jogosLancamento, 
+                      jogosDesenvolvedora,
+                      jogosCategories, 
+                      jogosTrailer
+               FROM Jogo 
+               WHERE jogosID = '${id}'`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -344,6 +378,8 @@ app.get("/game/:id", (req, res) => {
   });
 });
 
+// ################### PERFIL DO USUÁRIO #############
+
 app.get("/perfil/:id", (req, res) => {
   const id = req.params.id;
   const sql = `SELECT 
@@ -365,7 +401,7 @@ app.get("/perfil/:id", (req, res) => {
     LEFT JOIN Carrinho c ON u.userID = c.carrinhoUser
     LEFT JOIN CarrinhoJogo cj ON c.carrinhoID = cj.carrinhoID
     LEFT JOIN Jogo j ON cj.jogoID = j.jogosID
-     WHERE u.userID = ${id}`;
+    WHERE u.userID = ${id}`;
 
   conn.query(sql, (err, data) => {
     if (err) {
@@ -422,6 +458,46 @@ app.post("/user/register", (req, res) => {
   });
 });
 
+// ##################### UPDATE SENHA GET USUÁRIO #########################
+app.get("/update/:id", (req, res) => {
+  const id = req.params.id;
+
+  const sql = `SELECT * FROM User WHERE userID = ${id}`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    const register = data[0];
+
+    res.render("update", {
+      register: register,
+      style: "update.css",
+      about: "Update User",
+    });
+  });
+});
+
+// ##################### UPDATE POST SENHA #########################
+
+app.post("/user/update", (req, res) => {
+  const id = req.body.userID; // Alterado de req.body.id para req.body.userID
+  const password = req.body.password;
+
+  const sql = `UPDATE User SET  userPassword = '${password}' WHERE userID = ${id}`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.redirect("/");
+    console.log("Senha Atualizada com sucesso!");
+  });
+});
+
 // ###################### INSERT NO CARRINHO ####################
 app.post("/insert/carrinho", (req, res) => {
   const id = req.body.id;
@@ -459,7 +535,12 @@ app.post("/catalog/search", (req, res) => {
 
   // Consulta SQL corrigida com a tabela e colunas especificadas
   const sql = `
-    SELECT jogosID, jogosNome, jogosPrice, jogosImg, jogosPlataforma, jogosTipo
+    SELECT jogosID, 
+            jogosNome, 
+            jogosPrice, 
+            jogosImg, 
+            jogosPlataforma, 
+            jogosTipo
     FROM Jogo
     WHERE jogosNome LIKE '%${search}%'
   `;
@@ -481,7 +562,7 @@ app.post("/catalog/search", (req, res) => {
   });
 });
 
-//   ################### delete ###############
+//   ################### LIMPANDO CARRINHO COM DELETE ###############
 app.post("/delete/carrinho", (req, res) => {
   const deleteSQL = `DELETE FROM CarrinhoJogo
   WHERE carrinhoID = 1`;
