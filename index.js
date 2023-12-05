@@ -344,6 +344,44 @@ app.get("/game/:id", (req, res) => {
   });
 });
 
+app.get("/perfil/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = `SELECT 
+        u.userID,
+        u.userName,
+        u.userSurname,
+        u.userEmail,
+        u.userAddress,
+        c.carrinhoID,
+        cj.jogoID,
+        j.jogosNome,
+        j.jogosDesenvolvedora,
+        j.jogosTipo,
+        j.jogosCategories,
+        j.jogosDescricao,
+        j.jogosPrice,
+        j.jogosImg
+    FROM User u
+    LEFT JOIN Carrinho c ON u.userID = c.carrinhoUser
+    LEFT JOIN CarrinhoJogo cj ON c.carrinhoID = cj.carrinhoID
+    LEFT JOIN Jogo j ON cj.jogoID = j.jogosID
+     WHERE u.userID = ${id}`;
+
+  conn.query(sql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    const info = data;
+    res.render("perfil", {
+      style: "perfil.css",
+      about: "Perfil",
+      info: info,
+    });
+  });
+});
+
 // ##### INSERT USER #####
 app.post("/user/register", (req, res) => {
   const name = req.body.name;

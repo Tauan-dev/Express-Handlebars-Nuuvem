@@ -73,4 +73,15 @@ form {
 
 .btn-login {
   width: 270px;
+  margin-top: 15px;
+}
+
+.login-base {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  text-decoration: none;
+  color: #acacac;
 }
