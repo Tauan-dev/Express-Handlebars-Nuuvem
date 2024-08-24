@@ -1,15 +1,14 @@
 <h1>Atualizar senha</h1>
 <section>
-  <div class="login-container">
+  <div class="update-container">
     <form action="/user/update" method="POST">
       <div class="form-group">
         <input type="hidden" name="userID" value="{{register.userID}}" />
-        <label for="exampleInputEmail1" class="input-color">Nome </label>
+        <label for="name" class="input-color">Nome</label>
         <input
           type="text"
           name="name"
           class="form-control"
-          aria-describedby="emailHelp"
           placeholder="Insira seu nome"
           value="{{register.userName}}"
           readonly
@@ -17,19 +16,18 @@
       </div>
 
       <div class="form-group">
-        <label for="exampleInputEmail1" class="input-color">Email </label>
+        <label for="email" class="input-color">Email</label>
         <input
           type="email"
           name="email"
           class="form-control"
-          aria-describedby="emailHelp"
-          placeholder=" Insira seu email"
+          placeholder="Insira seu email"
           value="{{register.userEmail}}"
           readonly
         />
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1" class="input-color">Senha</label>
+        <label for="password" class="input-color">Senha</label>
         <input
           type="password"
           name="password"
@@ -39,9 +37,7 @@
         />
       </div>
 
-      <button type="submit" class="btn btn-info btn-login">
-        Alterar senha
-      </button>
+      <button type="submit" class="btn btn-info btn-update">Alterar senha</button>
     </form>
   </div>
 </section>

@@ -459,6 +459,7 @@ app.post("/user/register", (req, res) => {
 });
 
 // ##################### UPDATE SENHA GET USUÁRIO #########################
+
 app.get("/update/:id", (req, res) => {
   const id = req.params.id;
 
@@ -574,6 +575,24 @@ app.post("/delete/carrinho", (req, res) => {
     }
     console.log("Jogo removido com sucesso do carrinho");
     res.redirect("/");
+  });
+});
+
+// Rota GET para obter uma entrega específica por ID
+app.get("/api/entrega/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = "SELECT * FROM ENTREGA WHERE COD_ENTREGA = ?";
+
+  conn.query(sql, [id], (err, results) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send({ message: "Entrega não encontrada" });
+    }
+
+    res.json(results[0]);
   });
 });
 

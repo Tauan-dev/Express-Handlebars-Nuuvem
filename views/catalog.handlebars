@@ -14,7 +14,6 @@
       type="submit"
     >Pesquisar</button>
   </form>
-
 </div>
 
 <ul class="section">
@@ -234,14 +233,17 @@
 <div class="card-container">
   {{#each jogo}}
     <div class="card">
-      <img src="{{this.jogosImg}}" class="card-img-top" alt="" />
+      <img
+        src="{{this.jogosImg}}"
+        class="card-img-top"
+        alt="{{this.jogosNome}}"
+      />
       <div class="card-body card-color">
         <h6 class="card-title">{{this.jogosNome}}</h6>
         <a
           href="http://localhost:3000/game/{{this.jogosID}}"
           class="btn btn-secondary btn-tamanho"
-        >R$
-          {{this.jogosPrice}}</a>
+        >R$ {{this.jogosPrice}}</a>
       </div>
     </div>
   {{/each}}

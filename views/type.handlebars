@@ -229,12 +229,16 @@
 <div class="card-container">
   {{#each jogos}}
     <div class="card">
-      <img src="{{this.jogosImg}}" class="card-img-top" alt="" />
+      <img
+        src="{{this.jogosImg}}"
+        class="card-img-top"
+        alt="{{this.jogosNome}}"
+      />
       <div class="card-body card-color">
         <h6 class="card-title">{{this.jogosNome}}</h6>
         <a
           href="http://localhost:3000/game/{{this.jogosID}}"
-          class="btn btn-secondary btn-tamanho"
+          class="btn btn-tamanho"
         >R$
           {{this.jogosPrice}}</a>
       </div>

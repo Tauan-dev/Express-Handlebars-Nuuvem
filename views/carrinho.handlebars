@@ -1,4 +1,3 @@
-<!-- Parte do código do front-end -->
 <h1>MEU CARRINHO</h1>
 
 <div class="compra">
@@ -34,11 +33,8 @@
     {{/unless}}
 
     <div class="btn-group">
-      <a
-        href="http://localhost:3000/finishbuy"
-        class="btn btn-success"
-        name="finish"
-      >Finalizar compra</a>
+      <a href="/finishbuy" class="btn btn-success" name="finish">Finalizar
+        compra</a>
     </div>
   </div>
 
@@ -47,20 +43,28 @@
       <!-- Jogo mais caro -->
       <h3>Jogo mais caro do carrinho: </h3>
       <h5>{{maxInfo.jogosNome}} - R$ {{maxInfo.jogosPrice}}</h5>
-      <img src="{{maxInfo.jogosImg}}" alt="Imagem do jogo mais caro" />
+      <img
+        src="{{maxInfo.jogosImg}}"
+        alt="Imagem do jogo mais caro"
+        class="game-image"
+      />
 
       <!-- Jogo mais barato -->
       <h3>Jogo mais barato do carrinho: </h3>
       <h5>{{minInfo.jogosNome}} - R$ {{minInfo.jogosPrice}}</h5>
-      <img src="{{minInfo.jogosImg}}" alt="Imagem do jogo mais barato" />
+      <img
+        src="{{minInfo.jogosImg}}"
+        alt="Imagem do jogo mais barato"
+        class="game-image"
+      />
     </div>
   {{/if}}
 </div>
 
 <div class="informacao">
   <div class="info-container">
+    <h3>Informações importantes:</h3>
     <ul>
-      <h3>Informações importantes:</h3>
       <li>
         Todos os itens são entregues apenas de forma digital por download ou
         créditos direto na conta e estão sujeitos à política de reembolso.

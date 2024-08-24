@@ -236,12 +236,16 @@
   </li>
 </ul>
 
-<h2 class="title-game"> Jogos de {{categoryName}} :{{totalJogos}}</h2>
+<h2 class="title-game">Jogos de {{categoryName}} :{{totalJogos}}</h2>
 
 <div class="card-container">
   {{#each jogos}}
     <div class="card">
-      <img src="{{this.jogosImg}}" class="card-img-top" alt="" />
+      <img
+        src="{{this.jogosImg}}"
+        class="card-img-top"
+        alt="{{this.jogosNome}}"
+      />
       <div class="card-body card-color">
         <h6 class="card-title">{{this.jogosNome}}</h6>
         <a
