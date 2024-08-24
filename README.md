@@ -14,10 +14,8 @@ Uma réplica do site Nuuvem utilizando Handlebars, MySQL, Node.js com Express, B
 
 ## Sobre o Projeto
 
-O Nuuvem Replica é um projeto que visa reproduzir as principais funcionalidades do site Nuuvem, oferecendo uma plataforma de distribuição digital de jogos e softwares. Desenvolvido como parte de um projeto educacional, o objetivo é praticar o uso de tecnologias web modernas.
+O Nuuvem Replica é um projeto que visa reproduzir as principais funcionalidades do site Nuuvem, oferecendo uma plataforma responsiva de distribuição digital de jogos e softwares. Desenvolvido como parte de um projeto educacional, o objetivo é praticar o uso de tecnologias web modernas.
 <br/>
-
-Responsividade ainda em desenvolvimento !
 
 **Atenção** : A home é estatica, porém todo o resto esta integrado
 
@@ -71,7 +69,6 @@ Configure no package.json
 
 ```bash
  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./index.js start localhost 3000"
   },
 ```
@@ -79,6 +76,13 @@ Configure no package.json
 ## Inicie o servidor
 
 Acesse o projeto em http://localhost:3000 no seu navegador.
+
+## Possíveis Melhorias
+
+- **Integração de Pagamento**: Adicionar uma funcionalidade de pagamento real utilizando serviços como PayPal ou Stripe.
+- **Autenticação e Autorização**: Melhorar o sistema de autenticação, incluindo a integração de OAuth com redes sociais e a autorização de acesso baseado em papéis.
+- **Otimização de Performance**: Analisar e otimizar o desempenho do site, especialmente em termos de carregamento de páginas e tempo de resposta do servidor.
+- **Testes Automatizados**: Implementar uma suíte de testes automatizados para garantir a qualidade e a estabilidade do código.
 
 ## Contribuição
 
